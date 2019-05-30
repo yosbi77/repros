@@ -13,11 +13,16 @@ const submit = async (id) => {
 	console.log(a.x);
 };
 
-const getById = async (id) => {
-	return await A.findById(id);
+const create = async (aParam) => {
+	const a = new A(aParam);
+
+	a.save();
 };
+
+const getAll = async () => await A.find();
 
 module.exports = {
 	submit,
-	getById
+	create,
+	getAll
 };

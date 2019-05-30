@@ -15,14 +15,24 @@ const submit = (req, res, next) => {
 		.catch(err => next(err));
 };
 
-const getById = (req, res, next) => {
-	aService.getById(req.params.id)
-		.then(a => a ? res.json(a) : res.sendStatus(404))
+const create = (req, res, next) => {
+	aService.create(req.body)
+		.then(a => a ? res.json(a) : res.json({
+			success: true,
+			msg: 'A created'
+		}))
+		.catch(err => next(err));
+};
+
+const getAll = (req, res, next) => {
+	aService.getAll()
+		.then(as => res.json(as))
 		.catch(err => next(err));
 };
 
 //routes
 router.get('/submit/:id', submit);
-router.get('/:id', getById);
+router.post('/', create);
+router.get('/', getAll);
 
 module.exports = router;
